@@ -1,0 +1,53 @@
+{
+  "name": "emacs-switch-buffer",
+  "displayName": "Emacs Switch Buffer",
+  "description": "Emacs-style switch-to-buffer (C-x b): jump straight back to your previous buffer, or fuzzy-search all open buffers, from one MRU-ordered quick pick.",
+  "version": "0.0.1",
+  "publisher": "REPLACE_ME_PUBLISHER_ID",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Keymaps", "Other"],
+  "keywords": ["emacs", "buffer", "switch-to-buffer", "mru", "quickpick"],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "switchToBuffer.switch",
+        "title": "Switch to Buffer",
+        "category": "Switch to Buffer"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "switchToBuffer.switch",
+        "key": "ctrl+x b",
+        "mac": "ctrl+x b",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "node esbuild.js --production",
+    "watch": "node esbuild.js --watch",
+    "typecheck": "tsc",
+    "lint": "eslint src",
+    "pretest": "npm run typecheck && npm run lint",
+    "test": "node --import tsx --test src/**/*.test.ts",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "@types/node": "^24.0.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.9.0",
+    "esbuild": "^0.28.0",
+    "eslint": "^9.0.0",
+    "typescript": "^5.7.0",
+    "typescript-eslint": "^8.0.0",
+    "tsx": "^4.23.0"
+  }
+}
