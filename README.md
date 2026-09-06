@@ -7,7 +7,7 @@ Emacs-style `switch-to-buffer` (`C-x b`) for VS Code: one quick pick, MRU-ordere
 
 ## Usage
 
-- Keybinding: `Ctrl+X B` (same physical chord on every OS — not remapped to `Cmd+X B` on Mac, matching Emacs convention), active while an editor has focus.
+- Keybinding: `Ctrl+X B` (same physical chord on every OS — not remapped to `Cmd+X B` on Mac, matching Emacs convention), active while an editor has focus, or while an empty split pane (no file open) has focus, so a fresh split is a valid switch target. Disabled while the integrated terminal has focus, since many shells use `Ctrl+X` chords of their own.
 - Command Palette: "Switch to Buffer: Switch to Buffer".
 
 ## How it works

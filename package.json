@@ -25,7 +25,7 @@
         "command": "switchToBuffer.switch",
         "key": "ctrl+x b",
         "mac": "ctrl+x b",
-        "when": "editorTextFocus"
+        "when": "editorTextFocus || (activeEditorGroupEmpty && !terminalFocus)"
       }
     ]
   },
