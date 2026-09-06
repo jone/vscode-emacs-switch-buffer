@@ -39,7 +39,13 @@ function toQuickPickItem(uri: vscode.Uri): BufferQuickPickItem {
 }
 
 export async function showSwitchToBufferQuickPick(tracker: MruTracker): Promise<void> {
-  const currentId = vscode.window.activeTextEditor?.document.uri.toString();
+  // Capture the invoking editor's group up front. The QuickPick steals focus
+  // while open, and re-reading `vscode.window.activeTextEditor` after it
+  // closes races focus restoration -- it can resolve before the previous
+  // group has regained focus, silently targeting the wrong split pane.
+  const invokingEditor = vscode.window.activeTextEditor;
+  const currentId = invokingEditor?.document.uri.toString();
+  const targetColumn = invokingEditor?.viewColumn ?? vscode.ViewColumn.Active;
   const openUris = collectOpenTextUris();
   const byId = new Map(openUris.map((u) => [u.toString(), u]));
 
@@ -75,7 +81,6 @@ export async function showSwitchToBufferQuickPick(tracker: MruTracker): Promise<
   });
 
   if (picked) {
-    const activeColumn = vscode.window.activeTextEditor?.viewColumn ?? vscode.ViewColumn.Active;
-    await vscode.window.showTextDocument(picked.uri, { viewColumn: activeColumn, preview: false });
+    await vscode.window.showTextDocument(picked.uri, { viewColumn: targetColumn, preview: false });
   }
 }
