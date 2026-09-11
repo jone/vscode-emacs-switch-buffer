@@ -1,7 +1,16 @@
 name: Publish to VS Code Marketplace
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      version_bump:
+        description: 'Version bump (choose "none" to just republish the current package.json version)'
+        type: choice
+        options: [none, patch, minor, major]
+        default: none
+
+permissions:
+  contents: write
 
 jobs:
   publish:
@@ -14,4 +23,19 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
+
+      - name: Bump version, tag, and push
+        if: ${{ inputs.version_bump != 'none' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          npm version ${{ inputs.version_bump }} -m "v%s"
+          git push --follow-tags
+
       - run: npx vsce publish --no-rewrite-relative-links --pat "${{ secrets.VSCE_PAT }}"
+
+      - name: Create GitHub release
+        if: ${{ inputs.version_bump != 'none' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "v$(node -p "require('./package.json').version")" --generate-notes

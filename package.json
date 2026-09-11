@@ -2,7 +2,7 @@
   "name": "emacs-switch-buffer",
   "displayName": "Emacs Switch Buffer",
   "description": "Emacs-style switch-to-buffer (C-x b): jump straight back to your previous buffer, or fuzzy-search all open buffers, from one MRU-ordered quick pick.",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "publisher": "jone",
   "license": "MIT",
   "repository": {
