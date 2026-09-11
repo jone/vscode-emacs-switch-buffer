@@ -32,7 +32,7 @@ jobs:
           npm version ${{ inputs.version_bump }} -m "v%s"
           git push --follow-tags
 
-      - run: npx vsce publish --no-rewrite-relative-links --pat "${{ secrets.VSCE_PAT }}"
+      - run: npx vsce publish --pat "${{ secrets.VSCE_PAT }}"
 
       - name: Create GitHub release
         if: ${{ inputs.version_bump != 'none' }}
