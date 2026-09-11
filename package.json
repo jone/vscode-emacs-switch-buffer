@@ -3,8 +3,12 @@
   "displayName": "Emacs Switch Buffer",
   "description": "Emacs-style switch-to-buffer (C-x b): jump straight back to your previous buffer, or fuzzy-search all open buffers, from one MRU-ordered quick pick.",
   "version": "0.0.1",
-  "publisher": "local-dev",
+  "publisher": "jone",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jone/vscode-emacs-switch-buffer.git"
+  },
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -37,7 +41,7 @@
     "lint": "eslint src",
     "pretest": "npm run typecheck && npm run lint",
     "test": "node --import tsx --test src/**/*.test.ts",
-    "package": "vsce package --allow-missing-repository --no-rewrite-relative-links"
+    "package": "vsce package --no-rewrite-relative-links"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
